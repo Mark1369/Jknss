@@ -1,24 +1,19 @@
 pipeline {
     agent any
-    options {
-        skipStagesAfterUnstable()
-    }
+
     stages {
-        stage('Build') {
+
+        stage('Kompilacja') {
             steps {
-                sh 'make'
+                sh 'gcc sort.c -o sort'
             }
         }
-        stage('Test'){
+
+        stage('Uruchomienie') {
             steps {
-                sh 'make check'
-                junit 'reports/**/*.xml'
+                sh './sort'
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'make publish' //
-            }
-        }
+
     }
 }
